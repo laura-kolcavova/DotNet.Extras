@@ -125,43 +125,43 @@ namespace DotNet.Extras.Tools
         /// <param name="bmp2">Second Bitmap object.</param>
         /// <param name="options">Compare options.</param>
         /// <returns><see cref="CompareResult"/>.</returns>
-        public static CompareResult CompareByHashCode(Bitmap bmp1, Bitmap bmp2, CompareOption options = CompareOption.None)
-        {
-            if (PreCompare(bmp1, bmp2, out CompareResult result))
-            {
-                return result;
-            }
+        //public static CompareResult CompareByHashCode(Bitmap bmp1, Bitmap bmp2, CompareOption options = CompareOption.None)
+        //{
+        //    if (PreCompare(bmp1, bmp2, out CompareResult result))
+        //    {
+        //        return result;
+        //    }
 
-            if ((options & CompareOption.ResizeTo16x16) != 0)
-            {
-                var tuple = ResizeBitmapsTo16x16(bmp1, bmp2);
-                bmp1 = tuple.Item1;
-                bmp2 = tuple.Item2;
-            }
+        //    if ((options & CompareOption.ResizeTo16x16) != 0)
+        //    {
+        //        var tuple = ResizeBitmapsTo16x16(bmp1, bmp2);
+        //        bmp1 = tuple.Item1;
+        //        bmp2 = tuple.Item2;
+        //    }
 
-            var ic = new ImageConverter();
+        //    var ic = new ImageConverter();
 
-            byte[] btImage1 = new byte[1];
-            byte[] btImage2 = new byte[1];
+        //    byte[] btImage1 = new byte[1];
+        //    byte[] btImage2 = new byte[1];
 
-            btImage1 = (byte[])ic.ConvertTo(bmp1, btImage1.GetType());
-            btImage2 = (byte[])ic.ConvertTo(bmp2, btImage2.GetType());
+        //    btImage1 = (byte[])ic.ConvertTo(bmp1, btImage1.GetType());
+        //    btImage2 = (byte[])ic.ConvertTo(bmp2, btImage2.GetType());
 
-            var shaM = new SHA256Managed();
-            byte[] hash1 = shaM.ComputeHash(btImage1);
-            byte[] hash2 = shaM.ComputeHash(btImage2);
+        //    var shaM = new SHA256Managed();
+        //    byte[] hash1 = shaM.ComputeHash(btImage1);
+        //    byte[] hash2 = shaM.ComputeHash(btImage2);
 
-            for (int i = 0; i < hash1.Length && i < hash2.Length; i++)
-            {
-                if (hash1[i] != hash2[i])
-                {
-                    result = CompareResult.PixelMismatch;
-                    break;
-                }
-            }
+        //    for (int i = 0; i < hash1.Length && i < hash2.Length; i++)
+        //    {
+        //        if (hash1[i] != hash2[i])
+        //        {
+        //            result = CompareResult.PixelMismatch;
+        //            break;
+        //        }
+        //    }
 
-            return result;
-        }
+        //    return result;
+        //}
 
         /// <summary>
         /// Compares two Bitmap objects iterating all pixels with use of GetPixel - very slow, thread safe.
